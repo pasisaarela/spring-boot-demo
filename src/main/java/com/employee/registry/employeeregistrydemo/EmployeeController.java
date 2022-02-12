@@ -36,7 +36,7 @@ public class EmployeeController {
 		Optional<Employee> employee = employeeRepository.findById(employeeId);
 		
 		if (!employee.isPresent()) {
-			return null; // ADD CUSTOM MESSAGE
+			throw new UserNotFoundException("employee id:" +employeeId+ " not found");
 		} else {
 			return employee.get();
 		}
@@ -45,10 +45,10 @@ public class EmployeeController {
 	// Retrieve a single employee by name
 	@GetMapping("/employees/name/{name}")
 	public Employee retrieveEmployee(@PathVariable String name) {
-		Employee employee = employeeRepository.findByName(name);
+		Employee employee = employeeRepository.findByNameIgnoreCase(name);
 		
 		if (employee==null) {
-			return null; // ADD CUSTOM MESSAGE
+			throw new UserNotFoundException("employee name: " +name+ " not found");
 		} else {
 			return employee;
 		}
@@ -58,7 +58,6 @@ public class EmployeeController {
 	@PostMapping("/employees")
 	public ResponseEntity<Object> addEmployee(@Valid @RequestBody Employee employee) {
 		Employee savedEmployee = employeeRepository.save(employee);
-	
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(savedEmployee.getEmployeeId()).toUri();
 		return ResponseEntity.created(location).build();
@@ -73,8 +72,7 @@ public class EmployeeController {
 					return employeeRepository.save(employee);
 				})
 				.orElseGet(() -> {
-					//return employeeRepository.save(newEmployee);
-					return null; // lisätään usernotfound
+					throw new UserNotFoundException("employee id: " +id+" not found");
 				});
 	}
 	

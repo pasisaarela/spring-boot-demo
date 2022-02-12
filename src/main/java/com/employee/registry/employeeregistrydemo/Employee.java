@@ -2,15 +2,11 @@ package com.employee.registry.employeeregistrydemo;
 
 
 import java.sql.Timestamp;
-import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.Size;
-
-import org.hibernate.annotations.CreationTimestamp;
 
 
 @Entity
@@ -21,9 +17,7 @@ public class Employee {
 	@Size(min=4, max = 64)
 	private String name;
 
-	@Column(name="datecreated", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-	@CreationTimestamp
-    private Timestamp dateCreated;
+    private Timestamp timeAdded = new Timestamp(System.currentTimeMillis());
 	
 	@Id
 	@GeneratedValue
@@ -40,11 +34,11 @@ public class Employee {
 		this.name = name;
 	}
 	public Timestamp getTimeAdded() {
-		return dateCreated;
+		return timeAdded;
 	}
 	
-	public void setTimeAdded(Timestamp dateCreated) {
-		this.dateCreated = dateCreated;
+	public void setTimeAdded(Timestamp timeAdded) {
+		this.timeAdded = timeAdded;
 	}
 	
 	// Constructor from fields
@@ -52,7 +46,7 @@ public class Employee {
 		super();
 		this.employeeId = employeeId;
 		this.name = name;
-		this.dateCreated = dateCreated;
+		this.timeAdded = dateCreated;
 	}
 	
 	// Default constructor
@@ -62,6 +56,6 @@ public class Employee {
 	
 	@Override
 	public String toString() {
-		return "Employee [employeeId=" + employeeId + ", name=" + name + ", dateCreated=" + dateCreated + "]";
+		return "Employee [employeeId=" + employeeId + ", name=" + name + ", dateCreated=" + timeAdded + "]";
 	}
 }
