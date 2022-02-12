@@ -3,10 +3,13 @@ package com.employee.registry.employeeregistrydemo;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 
 @Entity
@@ -17,6 +20,8 @@ public class Employee {
 	@Size(min=4, max = 64)
 	private String name;
 
+	@Column(nullable=false)
+	@CreationTimestamp
     private Timestamp timeAdded = new Timestamp(System.currentTimeMillis());
 	
 	@Id
