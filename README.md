@@ -11,7 +11,7 @@ Clone this repository and navigate to the root of the cloned repository.
 
 Start the service with command:
 ```bash
-mvn spring-boot:start
+mvn spring-boot:run
 ```
 ## Running unit tests
 You can run unit tests with the following command (Please note: main service needs to be running so test cases can connect to h2 database): 
