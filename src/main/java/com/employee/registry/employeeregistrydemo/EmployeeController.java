@@ -52,6 +52,7 @@ public class EmployeeController {
 		}
 	}
 
+	// Adding an employee
 	@PostMapping("/employees")
 	public Employee addEmployee(@Valid @RequestBody Employee employee) {
 		 employeeRepository.save(employee);
