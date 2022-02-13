@@ -14,7 +14,7 @@ Clone this repository and navigate to the root of the cloned repository.
 
 Start the service with command:
 
-	mvn spring-boot:start
+	mvn spring-boot:run
 
 ---------------------------------
 
